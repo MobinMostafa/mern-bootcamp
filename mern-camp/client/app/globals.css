@@ -1,0 +1,18 @@
+.button {
+  background-color: #424769  !important;
+  color: #F6B17A !important;
+}
+.lnk{
+  color: #F6B17A !important;
+}
+.button:hover{
+  background-color:#2D3250 !important;
+  transition: .3s ease-in-out !important;
+}
+
+.background-bg{
+  background-image: url('../public/images/bg.jpg') !important;
+  width: 100% !important;
+  height: 150px !important;
+  text-shadow: 2px 2px 2px #F6B17A !important;
+}

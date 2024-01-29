@@ -1,9 +1,26 @@
-import express, { json } from 'express'
+import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan';
 import authRoutes from './routes/auth.js';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv'
 
 const app = express()
+
+
+// db 
+dotenv.config()
+
+mongoose.connect(process.env.DB)
+    .then(() => console.log("db connected") )
+    .catch(e => console.log(e))
+
+// main().catch(err => console.log(err));
+
+// async function main() {
+//   await mongoose.connect('mongodb+srv://mobinmostafa920:996054mobin@cluster0.4n5b1ll.mongodb.net/?retryWrites=true&w=majority');
+//   console.log("db connected")
+// }
 
 app.use(cors())
 app.use(morgan("dev"))
