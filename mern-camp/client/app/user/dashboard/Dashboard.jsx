@@ -4,9 +4,11 @@ import CreatePost from '@/app/components/CreatePost'
 import UserRoute from '@/app/components/routes/UserRoute'
 import UserContext from '@/app/context/userContext'
 import { useRouter } from 'next/navigation'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import PostList from '@/app/components/cards/PostList'
+// import PostList from '@/app/components/cards/PostList'
 
 
 const Dashboard = () => {
@@ -15,6 +17,7 @@ const Dashboard = () => {
   const [content, setContent] = useState("")
   const [image, setImage] = useState({})
   const [uploading, setUploading] = useState(false)
+  const [posts, setPosts] = useState([])
 
   const router = useRouter()
   const postSubmit = async (e) => {
@@ -23,9 +26,11 @@ const Dashboard = () => {
      try {
       const {data} = await axios.post("/create-post", {content, image})
       // console.log(data)
+        
       if(data.error){
         toast.error(data.error)
       }else{
+        fetchUserPosts()
         toast.success("Post is created")
         setContent("")
         setImage({})
@@ -53,6 +58,31 @@ const Dashboard = () => {
       setUploading(false)
     }
   }
+   useEffect(() => {
+     if (state && state.token) fetchUserPosts()
+   }, [state && state.token])
+
+   const fetchUserPosts = async () => {
+       try {
+        const { data } = await axios.get("/user-posts")
+        //  console.log(data)
+        setPosts(data)
+       } catch (error) {
+        console.log(error)
+       }
+   }
+
+   const handleDelete = async (post) => {
+        try {
+          const answer = window.confirm("Are you sure")
+          if(!answer) return 
+          const {data} = await axios.delete(`/delete-post/${post._id}`)
+          toast.error("Post deleted")
+          fetchUserPosts()
+        } catch (error) {
+          console.log(error)
+        }
+   }
 
   return (
     <>
@@ -66,12 +96,15 @@ const Dashboard = () => {
             <div className="col justify-content-center mx-md-4">
                <CreatePost
                 content={content}
+                postHeading={"Create New Post"}
                 setContent={setContent}
                 postSubmit={postSubmit}
                 handleImage={handleImage}
                 uploading={uploading}
                 image={image}
+                buttonText={"Create post"}
                />
+              <PostList posts={posts} handleDelete={handleDelete} />
             </div>
           </div>
        </div>

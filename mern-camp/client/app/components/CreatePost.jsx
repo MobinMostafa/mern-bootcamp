@@ -8,11 +8,11 @@ import { CameraOutlined, LoadingOutlined } from '@ant-design/icons';
 
 
 
-const CreatePost = ({content, setContent, postSubmit, handleImage, uploading,image }) => {
+const CreatePost = ({content, setContent, postSubmit, handleImage, uploading,image, postHeading, buttonText }) => {
   return (
      <div className="card">
          <div className="card-header">
-            <h2>Create New Post</h2>
+            <h2>{postHeading}</h2>
          </div>
         <form onSubmit={postSubmit} >
             <div className="card-body">
@@ -30,7 +30,7 @@ const CreatePost = ({content, setContent, postSubmit, handleImage, uploading,ima
                 
          
             <div className="card-footer d-md-flex justify-content-between">
-                <Button type={'submit'} buttonText={'Create post'} className={'mb-2'}/>
+                <Button type={'submit'} buttonText={buttonText} className={'mb-2'}/>
                 <label className='mb-2' style={{cursor: "pointer"}}>
                  { image && image.url ? ( <Avatar size={30} src={image.url} className='mt-1' /> ) : uploading ? ( <LoadingOutlined style={{fontSize: "2rem"}} /> ) : <CameraOutlined style={{fontSize: "2rem"}} /> }
                

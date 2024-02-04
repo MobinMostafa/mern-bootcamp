@@ -44,12 +44,31 @@ const Menu = () => {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             {state !== null
              ? (
-               <>
-               <li className="nav-item">
-                   <Link className='nav-link' style={{ color :`${pathName === "/user/dashboard" ? active  : '#fff' }`}} href="/user/dashboard">
-                    {state && state.user && state.user.name}
-                   </Link>
+               <>   
+               <li className="nav-item dropdown">
+               
+                <a className="nav-link dropdown-toggle text-light" style={{cursor: 'pointer'}} data-bs-toggle="dropdown" aria-expanded="false">
+                {state && state.user && state.user.name} 
+               </a>
+               <ul className="dropdown-menu" style={{backgroundColor: "#2D3250"}}>
+               <Link  className='dropdown-item'  style={{ color :`${pathName === "/user/dashboard" ? active  : '#fff' }`}} href="/user/dashboard" >
+                    Dashboard
+               </Link>
+                  <li><a className="dropdown-item text-light " href="#">Action</a></li>
+                  <li><a className="dropdown-item text-light" href="#">Another action</a></li>
+                  <li><a className="dropdown-item text-light" href="#">Something else here</a></li>
+                </ul>
                </li>
+                {/* <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown button
+                </button>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                </ul> */}
+               
+
                <li className="nav-item">
                    <a className='nav-link' onClick={logout}  style={{color: "#fff", cursor: "pointer" }}>Logout</a>
                </li>

@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema({
         min: 6,
         max: 64
     },
+    userName: {
+       type: String,
+       unique: true,
+       required: true
+    },
     about:{},
     photos: String,
     following: [{

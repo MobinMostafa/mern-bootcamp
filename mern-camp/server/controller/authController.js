@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 import { User } from "../models/user.model.js"
 import { hashPassword, comparePassword } from "../helpers/auth.js"
 import jwt from 'jsonwebtoken'
+import { nanoid } from 'nanoid'
+
 
 
 
@@ -39,7 +41,7 @@ export const registerController = async (req,res) => {
     // hash 
     const HashPassword = await hashPassword(password);
 
-    const user = new User({name, email, password: HashPassword, secret});
+    const user = new User({name, email, password: HashPassword, secret, userName: nanoid(6) });
     
     try {
         await user.save()
@@ -150,5 +152,6 @@ export const currentUserController = async (req, res) => {
     // })
    }
 }
+
 
 
