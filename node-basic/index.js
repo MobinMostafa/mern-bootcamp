@@ -18,7 +18,7 @@ mongoose.connect(process.env.DB)
 // main().catch(err => console.log(err));
 
 // async function main() {
-//   await mongoose.connect('mongodb+srv://mobinmostafa920:996054mobin@cluster0.4n5b1ll.mongodb.net/?retryWrites=true&w=majority');
+//   await mongoose.connect('your mongodb account');
 //   console.log("db connected")
 // }
 
