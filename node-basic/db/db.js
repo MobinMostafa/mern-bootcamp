@@ -1,1 +1,0 @@
-//mongodb+srv://mobinmostafa920:996054mobin@cluster0.4n5b1ll.mongodb.net/?retryWrites=true&w=majority
